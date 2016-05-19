@@ -36,7 +36,7 @@ Documentation available for SAMI:
     * [Download PDF](https://github.com/iadgov/Splunk-Assessment-of-Mitigation-Implementations/raw/master/SAMI_User_Instruction_Manual.pdf)
     * [View PDF on GitHub](https://github.com/iadgov/Splunk-Assessment-of-Mitigation-Implementations/blob/master/SAMI_User_Instruction_Manual.pdf)
 * Business logic 
-    * [Download Excel file](https://github.com/iadgov/Splunk-Assessment-of-Mitigation-Implementations/raw/master/SAMI_Business_Logic_Manual.pdf)
+    * [Download Excel file](https://github.com/iadgov/Splunk-Assessment-of-Mitigation-Implementations/raw/master/SAMI_Business_Logic.xlsx)
 
 ## License
 See [LICENSE](./LICENSE.md).
