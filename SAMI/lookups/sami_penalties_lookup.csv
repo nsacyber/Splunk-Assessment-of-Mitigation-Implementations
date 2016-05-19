@@ -1,0 +1,126 @@
+metric,category,measure,description,penalty,reason
+AE,SMEP,HW_NO_SMEP,Hardware does not support SMEP,5,Hardware does not support Supervisor Mode Execution Prevention
+AE,SMEP,OS_NO_SMEP,Operating system does not support SMEP,5,Operating system does not support Supervisor Mode Execution Prevention
+AE,SMAP,HW_NO_SMAP,Hardware does not support SMAP,5,Hardware does not support Supervisor Mode Access Prevention
+AE,SMAP,OS_NO_SMAP,Operating system does not support SMAP,5,Operating system does not support Supervisor Mode Access Prevention
+AE,BOOT,OS_NO_SECURE_BOOT,Operating system does not support UEFI Secure Boot,5,Operating system does not support UEFI Secure Boot
+AE,BOOT,LEGACY_BIOS,System BIOS may not support UEFI Secure Boot,5,"System BIOS is is a Legacy BIOS, OR is a UEFI BIOS in Legacy/Compatibility Support Mode, and therefore prevents enabling UEFI Secure Boot"
+AE,BOOT,SECURE_BOOT_NOT_ENABLED,UEFI Secure Boot is not enabled,5,System BIOS is a UEFI BIOS but UEFI Secure Boot is not enabled
+AE,FONT_BLOCKING,OS_OUTDATED_FOR_FONT_BLOCKING,Operating system does not support untrusted font blocking,5,Operating system does not support untrusted font blocking
+AE,FONT_BLOCKING,FONT_BLOCKING_NOT_CONFIGURED,Untrusted font blocking not been configured on this system,5,"The MitigationOptions_FontBocking (yes, it is misspelled in Windows 10 RTM) registry value under HKLM\Software\Policies\Microsoft\Windows NT\MitigationOptions\ has not been configured so untrusted font blocking is disabled"
+AE,FONT_BLOCKING,FONT_BLOCKING_IS_DISABLED,Untrusted font blocking is disabled for the OS via Group Policy,5,"The MitigationOptions_FontBocking (yes, it is misspelled in Windows 10 RTM) registry value under HKLM\Software\Policies\Microsoft\Windows NT\MitigationOptions\ is set to {0} ('{1}') instead of {2} ('{3}') so untrusted font blocking is disabled"
+AE,FONT_BLOCKING,FONT_BLOCKING_MO_IS_DISABLED,Untrusted font blocking is disabled for the OS via system MitigationOptions registry value,5,The MitigationOptions registry value under HKLM\System\CurrentControlSet\Control\Session Manager\Kernel\ is set to 0x{0:2X} instead of 0x{1:2X} and the Untrusted Font Blocking flag is set to {3} ('{3}') so untrusted font blocking is disabled
+AE,DEP,OS_OUTDATED_FOR_DEP,Operating system does not support DEP,20,Operating system does not support DEP
+AE,DEP,HW_OUTDATED_FOR_DEP,Processor does not support DEP,20,Hardware does not support DEP
+AE,DEP,DEP_DISABLED,DEP disabled on system,20,DEP is disabled.
+AE,DEP,DEP_DISABLED32,DEP disabled on system for 32-bit applications,10,DEP is disabled for 32-bit applications.
+AE,DEP,DEP_TOO_LOW,System DEP configuration too weak,10,DEP policy too low.
+AE,DEP,DEP_TOO_LOW32,System DEP configuration too weak for 32-bit applications,5,DEP policy too low for 32-bit applications.
+AE,DEP,DEP_OVERRIDDEN_FOR_APP,DEP disabled for app via MitigationOptions,2,DEP is disabled for {0}
+AE,DEP,APP_NOT_OPTED_IN_FOR_DEP,App not opted in for DEP,2,App {0} is not opted in for DEP
+AE,DEP,APP_OPTED_OUT_FROM_DEP,App opted out from DEP,2,App {0} is opted out from DEP via the AppCompat\\Layers key.
+AE,ASLR,OS_OUTDATED_FOR_ASLR,The operating system version is too old to support ASLR,20,OS version does not support ASLR
+AE,ASLR,OS_OUTDATED_FOR_MANDATORY_ASLR,The operating system version is too old to support mandatory ASLR,20,Operating systems prior to Vista do not support mandatory ASLR.
+AE,ASLR,ASLR_IMPLEMENTATION_WEAK,ASLR implementation known to be weak on 32-bit operating systems prior to Windows 8,10,Operating system is 32-bit and older than Windows 8.
+AE,ASLR,ASLR_CONFIG_NOT_DEFINED,ASLR configuration is not defined,10,The MoveImages value under the HKLM\System\CurrentControlSet\Session Manager\Memory Management\ key is not defined so that the system defaults to OptIn. Strong security require ASLR to be configured AlwaysOn.
+AE,ASLR,ASLR_CONFIG_WEAK,ASLR configuration is weak,10,"The MoveImages value under the HKLM\System\CurrentControlSet\Session Manager\Memory Management\ key is set to 1, OptIn. Strong security require ASLR to be configured AlwaysOn."
+AE,ASLR,ASLR_DISABLED,ASLR is configured to be disabled,20,The MoveImages value under the HKLM\System\CurrentControlSet\Session Manager\Memory Management\ key is set to 0 so that ASLR is disabled.
+AE,ASLR,APP_DOES_NOT_SUPPORT_ASLR,App does not support ASLR,2,App {0} is not built with ASLR support.
+AE,SEHOP,OS_OUTDATED_FOR_SEHOP,Operating system too outdated to support SEHOP,10,OS version does not support SEHOP
+AE,SEHOP,SEHOP_IS_DISABLED,SEHOP is not enabled on this system,10,SEHOP is not enabled on this system.
+AE,SEHOP,SEHOP_NOT_PRESENT,SEHOP has not been configured on this system,10,The MitigationOptions registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ does not exist.
+AE,SEHOP,SEHOP_NOT_CONFIGURED,SEHOP has not been configured on this system,10,The MitigationOptions registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel has not been configured to support SEHOP.
+AE,SEHOP,SEHOP_IS_DISABLED_WIN8,SEHOP is not enabled on this system,10,SEHOP is disabled via the MitigationOptions registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel.
+AE,SEHOP,APP_DOES_NOT_SUPPORT_SEHOP,SEHOP is disabled for the app,2,App {0} does not support SEHOP.
+AE,SEHOP,SEHOP_OVERRIDDEN_FOR_APP,SEHOP is overridden by the app,2,SEHOP is disabled for {0}'
+AE,KSEHOP,OS_OUTDATED_FOR_KSEHOP,Operating system too outdated to support kernel SEHOP,10,OS version does not support kernel SEHOP
+AE,KSEHOP,KSEHOP_NOT_CONFIGURED,Kernel SEHOP has not been configured on this system,10,The KernelSEHOPEnabled registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ has not been configured so kernel SEHOP is disabled
+AE,KSEHOP,KSEHOP_IS_DISABLED,Kernel SEHOP is disabled on this system,10,The KernelSEHOPEnabled registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel is set to {0} ('{1}') instead of {2} ('{3}') so kernel SEHOP is disabled
+AE,NULL_PAGE,OS_OUTDATED_FOR_NULL_PAGE_PROTECTION,Operating system too outdated to support null page mapping protection,10,OS version does not support Null Page protection
+AE,NULL_PAGE,ABLE_TO_MAP_NULL_PAGE,Able to map the null page,10,Able to map the null memory page
+AE,NULL_PAGE,NP_NOT_PRESENT,Null page mapping protection patch has not been applied,10,A patch (any 1 out of [{0}]) that adds the null page protection feature to the OS has not been applied
+AE,NULL_PAGE,NP_NOT_CONFIGURED,Null page mapping protection has not been configured on this system,10,The EnableLowVaAccess registry value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ does not exist so the null page can be mapped
+AE,NULL_PAGE,NP_IS_DISABLED,Null page mapping protection is disabled on this system,10,The EnableLowVaAccess registry value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ is set to {0} ('{1}') instead of {2} ('{3}') so the null page can be mapped
+AE,CFG,OS_OUTDATED_FOR_CFG,OS version does not support CFG,20,OS version does not support Control Flow Guard
+AE,CFG,CFG_NOT_PRESENT,Hotfix KB3000850 has not been applied,20,A patch (any 1 out of [{0}]) that adds the Control Flow Guard feature to the OS has not been applied
+AE,CFG,CFG_DISABLED_FOR_OS,Control Flow Guard is disabled for the OS via the CFG registry value,20,The EnableCFG registry value under HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\ is configured to {0} ('{1}') instead of {2} ('{3}') so Control Flow Guard is disabled
+AE,CFG,CFG_DISABLED_MO_FOR_OS,Control Flow Guard is disabled for the OS via system MitigationOptions registry value,20,The system wide MitigationOptions registry value under HKLM\System\CurrentControlSet\Control\Session Manager\Kernel\ is configured to 0x{0:2X} instead of 0x{1:2X} and the Control Flow Guard flag is set to {2} ('{3}')
+AE,CERTPADDING,CERTPADDING_NOT_PRESENT,Certificate padding patch has not been applied,5,A patch (any 1 out of [{0}]) that adds the certificate padding feature to the OS has not been applied
+AE,CERTPADDING,CERTPADDING_NOT_EXIST,EnableCertPaddingCheck registry value does not exist,5,The EnableCertPaddingCheck registry value under {0} does not exist
+AE,CERTPADDING,CERTPADDING_NOT_ENABLED,EnableCertPaddingCheck registry value is not set to 1,5,The EnableCertPaddingCheck registry value under {0} is set to {1} ('{2}') instead of {3} ('{4}')
+AE,SSP,OS_OUTDATED_FOR_SECURE_SEARCH_PATH,OS version does not support Secure Search Path,10,OS version does not support secure search path
+AE,SSP,SSP_NOT_PRESENT,Secure search path patch has not been applied,10,A hotfix (any 1 out of [{0}]) that adds the secure search path feature to the OS has not been applied
+AE,SSP,SSP_NOT_EXIST,CWDllIlegalInDllSearch registry value does not exist,10,The CWDllIlegalInDllSearch registry value under HKLM\System\CurrentControlSet\Session Manager\ does not exist
+AE,SSP,SSP_NOT_ENABLED,CWDllIlegalInDllSearch registry value is not set to 2,10,The CWDllIlegalInDllSearch registry value under HKLM\System\CurrentControlSet\Session Manager\ is set to {0} ('{1}') instead of being set to {2} ('{3}')
+AVFRS,AV,DAT_OUTDATED,DAT outdated,50,DAT file version {0} published on {1} is {2} days old
+AVFRS,AV,DAT_VERY_OUTDATED,DAT very outdated,100,DAT file version {0} published on {1} is {2} days old which is beyond the recommended value of {3} days
+AVFRS,AVFRS,ARTEMIS_SERVER_UNREACHABLE,artemis server unreachable,100,Unable to resolve GTI server DNS address of {0}
+AVFRS,AVFRS,ARTEMIS_SERVER_UNEXPECTED,artemis server unexpected,50,The GTI server DNS address of {0} resolved to {1} which is not the expected value of {2}
+AVFRS,AVFRS,ARTEMIS_DISABLED,artemis disabled,100,GTI is Disabled for the {0} component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_LOW,artemis sensitivity low,50,GTI Sensitivity Level is set to {0} which is below the recommended level of Medium for the {1} component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_VERY_LOW,artemis sensitivity very low,100,GTI Sensitivity Level is set to {0} which is far below the recommended level of Medium for the {1} component
+AVFRS,AVFRS,ARTEMIS_DISABLED_OD,artemis disabled,,GTI is Disabled for the On Delivery component
+AVFRS,AVFRS,ARTEMIS_DISABLED_ES,artemis disabled,,GTI is Disabled for the Email Scanner component
+AVFRS,AVFRS,ARTEMIS_DISABLED_OA,artemis disabled,,GTI is Disabled for the On Access component
+AVFRS,AVFRS,ARTEMIS_DISABLED_DP,artemis disabled,,GTI is Disabled for the Desktop Protection component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_OD,artemis sensitivity low or very low,,GTI Sensitivity Level is set to {0} which is below the recommended level of Medium for the On Delivery component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_ES,artemis sensitivity low or very low,,GTI Sensitivity Level is set to {0} which is below the recommended level of Medium for the Email Scanner component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_OA,artemis sensitivity low or very low,,GTI Sensitivity Level is set to {0} which is below the recommended level of Medium for the On Access component
+AVFRS,AVFRS,ARTEMIS_SENSITIVITY_DP,artemis sensitivity low or very low,,GTI Sensitivity Level is set to {0} which is below the recommended level of Medium for the Desktop Protection component
+AVFRS,AV,AV_ENGINE_OUTDATED,AV engine is outdated,50,The AV engine version is {0} which is older than the latest supported engine version of {1}. Version 5600 and earlier are end of life.
+AVFRS,AV,AV_ENGINE_VERY_OUTDATED,AV engine is very outdated,100,The AV engine version is {0} which is older than the minimum recommended engine version of {1}. Version 5600 and earlier are end of life.
+AVFRS,AV,VSE_OUTDATED,VSE is outdated,50,The VirusScan Enterprise version is {0} which is older than latest recommended version of {1}
+AVFRS,AV,VSE_VERY_OUTDATED,VSE is very outdated,100,The VirusScan Enterprise version is {0} which is older than minimum recommended version of {1}
+AVFRS,AV,VSE_SERVICE_NOT_AUTOMATIC,VSE service is not automatically starting,100,The {0} service start mode is set to '{1}' rather than '{2}' so the system is not protected at the next boot
+AVFRS,AV,VSE_SERVICE_NOT_RUNNING,VSE service is not running,100,The {0} service state is '{1}' rather than '{2}' so the system is not protected
+AVFRS,AV,VSE_STARTUP_DISABLED,VSE startup is disabled,100,VSE on access scanning at system startup is disabled
+AVFRS,AV,VSE_NOT_INSTALLED,VSE is not installed,100,VirusScan Enterprise is not installed
+AW,SRP,SRP_BINARIES_NONE,SRP binaries,100,Software Restriction Policies scope is configured to apply to '{0}' rather than 'All Software Files'
+AW,SRP,SRP_BINARIES_EXE_ONLY,SRP binaries,75,Software Restriction Policies scope is configured to apply to '{0}' rather than 'All Software Files'
+AW,SRP,SRP_SCOPE_USERS_ONLY,SRP scope,50,The Software Restriction Policies scope is configured only for '{0}' rather than 'All Users'
+AW,SRP,SRP_NO_PATH_RULES,No SRP path rules,25,No Software Restriction Policies path rules were found
+AW,AWL,NO_WHITELISTING,No whitelisting found,100,No supported whitelisting implementation was found
+AW,APPLOCKER,APPLOCKER_BAD_PUBLISHER,Bad AppLocker publisher rule,50,AppLocker rule named '{0}' from the '{1}' rule set must be removed due to allowing any signed application to run
+AW,SRP,SRP_RULE_NOT_ENFORCED,SRP rule is not enforcing,50,A Software Restriction Policies rules is in '{0}' mode rather than in enforcement mode
+AW,APPLOCKER,APPLOCKER_BLACKLIST_RULE_MISSING,AppLocker blacklist rule is missing,25,The AppLocker rule named '{0}' from the '{1}' rule set is missing a required blacklist rule for '{2}'
+AW,APPLOCKER,APPLOCKER_NO_USERPROFILE_RULES,AppLocker rule allows execution from user profile,100,The AppLocker rule named '{0}' from the '{1}' rule set allows execution from user profiles
+AW,SRP,SRP_WHITELIST_RULE_MISSING,SRP whitelist rule is missing,75,A Software Restriction Policies whitelist rule for '{0}' is not configured
+AW,SRP,SRP_MISSING_EXE_TYPE,SRP missing executable type,25,An executable type of '{0}' is not in the Software Restriction Policies Designated File Types list
+AW,SRP,SRP_NO_BLACKLIST_RULES,No SRP blacklist rules,100,No Software Restriction Policies blacklist rules were found
+AW,SRP,SRP_BLACKLIST_RULE_MISSING,SRP blacklist rule is missing,25,A Software Restriction Policies blacklist rule for '{0}' is not configured which may allow some users to bypass SRP
+AW,APPLOCKER,APPLOCKER_NO_BLACKLIST_RULES,AppLocker rule set is missing all blacklist rules,100,The AppLocker rule named '{0}' from the '{1}' rule set is missing all required blacklist rules
+AW,APPLOCKER,APPLOCKER_RULESET_NOT_ENFORCED,AppLocker rule set is not enforced,100,The AppLocker rule set '{0}' is set to Audit rather than Enforcement
+AW,SRP,SRP_NOT_WHITELISTING,SRP is not whitelisting,100,Software Restriction Policies configuration is in '{0}' mode rather than in whitelisting mode
+AW,SRP,SRP_NO_WHITELIST_RULES,No SRP whitelist rules,25,No Software Restriction Policies whitelist rules were found
+AW,APPLOCKER,APPLOCKER_SERVICE_NOT_RUNNING,AppLocker service is not running,100,The Application Identity service state is '{0}' rather than '{1}' so the system is not protected
+AW,APPLOCKER,APPLOCKER_SERVICE_NOT_AUTOMATIC,AppLocker service is not automatically starting,100,The Application Identity service start mode is set to '{0}' rather than '{1}' so the system is not protected at the next boot
+AW,APPLOCKER,APPLOCKER_RULESET_NOT_CONFIGURED,AppLocker rule set is not configured,100,The AppLocker rule set '{0}' is not configured
+HBSS,HIPS,HIPS_SERVICE_NOT_RUNNING,HIPS service is not running,100,The HIPS service state is '{0}' rather than '{1}' so the system is not protected
+HBSS,HIPS,HIPS_NOT_LOGGING_LOW,HIPS reaction is not logging for low severity,10,The HIPS Protection policy is configured for a reaction level of {0} rather than Log (or higher) for low severity events
+HBSS,HIPS,HIPS_NOT_ENABLED,HIPS is not enabled,100,HIPS is not enabled in HIPS policy
+HBSS,HIPS,HIPS_NOT_ENFORCING,HIPS is not enforcing,100,HIPS is in adaptive mode (aka audit mode) and not enforcing
+HBSS,HIPS,UPDATE_HIPS,HIPS is outdated,50,The version of HIPS ({0}) is not the latest recommended version ({1})
+HBSS,HIPS,HIPS_NOT_PREVENTING_HIGH,HIPS reaction is not prevent for high severity,80,The HIPS Protection policy is configured for a reaction level of {0} rather than Prevent for high severity events
+HBSS,HIPS,UPDATE_HIPS_OLD,HIPS is very outdated,100,The version of HIPS ({0}) is older than the minimum recommended version ({1}) and is very outdated
+HBSS,HIPS,HIPS_NOT_PREVENTING_MEDIUM,HIPS reaction is not prevent for medium severity,40,The HIPS Protection policy is configured for a reaction level of {0} rather than Prevent for medium severity events
+HBSS,HIPS,HIPS_NOT_INSTALLED,HIPS is not installed,100,HIPS is not installed
+HBSS,HIPS,UPDATE_HIPS_CONTENT,HIPS security content is outdated,50,The HIPS security content version ({0}) is {1} days old which is beyond the limit of {2} days
+HBSS,HIPS,HIPS_SERVICE_NOT_AUTOMATIC,HIPS service is not automatically starting,100,The HIPS service start mode is set to '{0}' rather than '{1}' so the system is not protected at the next boot
+MOS,MOS,UPGRADE_TO_WIN7,Not using the latest operating system version,60,{0}{1} is installed which isn't the newest operating system
+MOS,MOS,UPGRADE_TO_WIN8,Not using the latest operating system version,30,{0}{1} is installed which isn't the newest operating system
+MOS,MOS,UPGRADE_TO_WIN10,Not using the latest operating system version,10,{0}{1} is installed which isn't the newest operating system.
+MOS,MOS,UNSUPPORTED_SP_WIN7,Unsupported service pack,100,{0}{1} is no longer supported by Microsoft when running this service pack
+MOS,MOS,UNSUPPORTED_OS,Unsupported operating system version,100,{0}{1} is installed. Windows XP/Windows Server 2003 and earlier operating systems are no longer supported by Microsoft
+MOS,MOS,UPGRADE_TO_WIN81,Not using the latest operating system version,20,{0}{1} is installed which isn't the newest operating system.
+MOS,MOS,UNSUPPORTED_SP_WINVISTA,Unsupported service pack,100,{0}{1} is no longer supported by Microsoft when running this service pack
+MOS,MOS,IS_WIN10,Using Windows 10,0,Using Windows 10
+OSPD,OSPD,NO_OS_PATCHES,No OS patches,100,The operating system did not have any patches installed.
+OSPD,OSPD,NO_OS_SECURITY_PATCHES,No OS security patches,100,The operating system did not have any security patches installed.
+OSPD,OSPD,OLD_OS_SECURITY_PATCH_DATE,OS security patch date is too old,100,The operating system's latest security patch install date ({0}) is {1} days old which is beyond the limit of {2} days
+OSPD,OSPD,OLD_OS_SECURITY_PATCH_AVERAGE_DAYS,The average number of days between security patch installation is too long,50,The average days between installed security patches is {0} days which is beyond the limit of {1} days
+OSPD,LOG,UPGRADE_OS,Upgrade OS to newer than Windows XP,100,Event Auditing is not available in Windows XP
+PtH,LOG,CONFIGURE_EVENT_LOG,Configure logon/logoff auditing,100,Group Policy is not configured to audit user logon/logoff events
+PtH,CAP,DOMAIN_ADMIN_LOGON_WORKSTATION,Domain Admin logon to workstation,10,Domain Admin ({0}) logged into this workstation. This allows attackers to steal Domain Admin credentials for re-use on other systems
+PtH,CAP,DOMAIN_ADMIN_LOGON_SERVER,Domain Admin logon to member server,1,Domain Admin ({0}) logged into this member server. This potentially allows attackers to steal Domain Admin credentials for re-use on other systems
+PtH,W2W,BLOCK_W2W_TRAFFIC,Workstation to workstation communication allowed,10,Workstation to Workstation Communication Allowed
+MISSING_DATA,MISSING_DATA,MISSING_DATA,Host listed in AD does not have data in Splunk,100,Host listed in AD does not have data in Splunk

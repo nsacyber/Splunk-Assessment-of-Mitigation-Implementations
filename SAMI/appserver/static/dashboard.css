@@ -1,0 +1,82 @@
+/*
+body,.dashboard-body,.footer,.app-bar,.dashboard-panel,.dashboard-cell {
+    background: #333 !important;
+}
+*/
+
+.app-bar {
+    background: #333 !important;
+}
+a {
+    color: #555;
+}
+a:hover {
+    color: #fff;
+}
+/* Panel Headings */
+.dashboard-row .dashboard-panel .panel-head h3,.dashboard-header h2, p.description, .nav-footer>li>a { 
+    color: #333; 
+    text-shadow: none; 
+}
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th { 
+    background-color: #666 !important;
+}
+.table .table, .table-striped>tbody>tr>td {
+    color: white;
+}
+.table .table, .table-striped>tbody>tr:nth-child(even)>td {
+    background-color: #888 !important;
+}
+.table-chrome > thead > tr > th {
+    background-image: linear-gradient(to bottom, #888, #666);
+    color: white !important;
+    text-shadow: none;
+}
+.table-chrome > thead > tr > th:hover {
+    background-image: linear-gradient(to bottom, #666, #444) !important;
+    color: white !important;
+    text-shadow: none;
+}
+.table-chrome .sorts a {
+    text-decoration: none;
+    color: #ddd;
+}
+.highlighted td {
+    background: #aaa !important;
+}
+/*
+svg>rect {
+    fill: #333 !important;
+}
+
+svg text { 
+    fill: #fff !important; 
+}
+*/
+
+/* Values in Panels, not related to charts or tables */
+.single-value .single-result {
+    color: #000;
+}
+.single-value .after-label {
+    color: #999;
+}
+.splunk-paginator a.selected { 
+    background: #000; 
+}
+/* Extras */
+.panel-body.html, .form-settings, .input label, h2.panel-title {
+    color: #000;
+}
+.html a, .view-new-time-range-picker-dialog .presets-container a, .sidebar .panel-contents a, #global-system-menu .popdown-dialog-body a {
+    color: #5379af;
+}
+.html a:hover, .view-new-time-range-picker-dialog .presets-container a:hover, .sidebar .panel-contents a:hover, #global-system-menu .popdown-dialog-body a:hover {
+    color: #32496a;
+}
+#token_debug.table-striped > tbody > tr:nth-child(odd) > td, #token_debug.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #fff !important;
+}
+#token_debug.table .table, #token_debug.table-striped>tbody>tr:nth-child(even)>td {
+    background-color: #f5f5f5 !important;
+}

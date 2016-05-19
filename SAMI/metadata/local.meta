@@ -1,0 +1,1072 @@
+[app/ui]
+version = 6.2.2
+modtime = 1445966684.495326700
+
+[app/launcher]
+version = 6.2.2
+modtime = 1445966684.510953000
+
+[indexes/sami]
+owner = nobody
+version = 6.2.2
+modtime = 1446051789.624041100
+
+[lookups/os_lookup.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456838571.410555300
+
+[lookups/OS-CurrentVersion.csv]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1447847532.931953400
+
+[transforms/SAMIPenaltiesLookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448981935.009356000
+
+[transforms/OSLookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1447870935.997299900
+
+[transforms/OSCurrentVersionLookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1447870943.138305300
+
+[savedsearches/OS_LOOKUP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449757065.954327900
+
+[transforms/HostList]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456838589.848709600
+
+[savedsearches/AE_OS_OUTDATED_FOR_DEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421582.183750100
+
+[macros/penalty_lookup]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448023992.521709500
+
+[savedsearches/AVFRS_DAT_OUTDATED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455652482.520346000
+
+[savedsearches/AVFRS_ARTEMIS_DISABLED_DP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423528.332330100
+
+[savedsearches/AVFRS_ARTEMIS_SENSITIVITY_DP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423543.223733400
+
+[savedsearches/AVFRS_ARTEMIS_DISABLED_ES]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423532.379416500
+
+[savedsearches/AVFRS_ARTEMIS_SENSITIVITY_ES]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423547.630213000
+
+[savedsearches/AVFRS_ARTEMIS_DISABLED_OA]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423535.957728100
+
+[savedsearches/AVFRS_ARTEMIS_SENSITIVITY_OA]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423556.552554600
+
+[savedsearches/AVFRS_ARTEMIS_DISABLED_OD]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423539.645420900
+
+[savedsearches/AVFRS_ARTEMIS_SENSITIVITY_OD]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423551.927312900
+
+[savedsearches/AVFRS_VSE_OUTDATED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423890.538759300
+
+[savedsearches/AVFRS_VSE_SERVICE_NOT_AUTOMATIC]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423929.197028800
+
+[savedsearches/AVFRS_VSE_SERVICE_NOT_RUNNING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423935.603613900
+
+[savedsearches/AVFRS_AV_ENGINE_OUTDATED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456512147.487668400
+
+[savedsearches/AW_APPLOCKER_RULESET_NOT_ENFORCED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424079.986158800
+
+[savedsearches/AW_APPLOCKER_BAD_PUBLISHER]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424035.155691300
+
+[savedsearches/AW_APPLOCKER_SERVICE_NOT_RUNNING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424127.488641200
+
+[savedsearches/AW_APPLOCKER_SERVICE_NOT_AUTOMATIC]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424118.488170900
+
+[savedsearches/AVFRS_VSE_STARTUP_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423948.323028400
+
+[savedsearches/AW_APPLOCKER_RULESET_NOT_CONFIGURED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424150.567972500
+
+[savedsearches/AVFRS_VSE_NOT_INSTALLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454354181.074521900
+
+[savedsearches/AW_APPLOCKER_NO_USERPROFILE_RULES]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424049.062667800
+
+[lookups/AppLocker-blacklistPath.csv]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448383689.333561100
+
+[savedsearches/AW_APPLOCKER_BLACKLIST_RULE_MISSING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456339187.229768400
+
+[savedsearches/MODERN_OS]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454507647.541701300
+
+[savedsearches/AE_HW_NO_SMAP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420710.731959100
+
+[savedsearches/AE_HW_NO_SMEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420719.107397800
+
+[savedsearches/AE_OS_NO_SECURE_BOOT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421735.973037200
+
+[savedsearches/AE_OS_NO_SMAP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421805.507920900
+
+[savedsearches/AE_OS_NO_SMEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421837.540845100
+
+[savedsearches/AE_LEGACY_BIOS]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420738.108390300
+
+[savedsearches/AE_OS_OUTDATED_FOR_FONT_BLOCKING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421692.377009200
+
+[savedsearches/AE_SECURE_BOOT_NOT_ENABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422341.754695100
+
+[props/hostList/EXTRACT-hostname]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448468854.738758800
+
+[savedsearches/AE_FONT_BLOCKING_IS_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454444061.297675000
+
+[savedsearches/AE_FONT_BLOCKING_NOT_CONFIGURED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420526.800471600
+
+[savedsearches/MISSING_DATA]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454507887.212015600
+
+[props/hostList/EXTRACT-hostName]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448477845.543405600
+
+[savedsearches/hostList_lookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456837557.239846100
+
+[savedsearches/AW_SRP_NOT_WHITELISTING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424806.899147800
+
+[savedsearches/AW_SRP_SCOPE_USERS_ONLY]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424704.081275100
+
+[savedsearches/AW_SRP_BINARIES_NONE]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424794.851644300
+
+[savedsearches/AW_SRP_BINARIES_EXE_ONLY]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424789.023214100
+
+[lookups/SRP-defaultExeTypes.csv]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448892273.002437800
+
+[savedsearches/AE_FONT_BLOCKING_MO_IS_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420536.832246100
+
+[savedsearches/AE_HW_OUTDATED_FOR_DEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420723.545128300
+
+[savedsearches/AE_DEP_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420572.177842600
+
+[views/HIPS_Summary]
+version = 6.2.2
+modtime = 1448986525.909808600
+
+[lookups/sami_penalties_lookup2.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1448976968.101401100
+
+[savedsearches/AE_DEP_TOO_LOW]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420556.895794200
+
+[savedsearches/Average%20Score%20Trend]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449078167.645371500
+
+[savedsearches/Measure%20Findings%20Host%20Count]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454355419.701751900
+
+[views/metric_summary]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1458302963.152854500
+
+[savedsearches/AE_DEP_OVERRIDDEN_FOR_APP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.3.3
+modtime = 1458759424.120424500
+
+[nav/default]
+version = 6.2.2
+modtime = 1450698184.948329200
+
+[savedsearches/AE_APP_NOT_OPTED_IN_FOR_DEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.3.3
+modtime = 1458759277.391199200
+
+[savedsearches/AE_APP_OPTED_OUT_FROM_DEP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.3.3
+modtime = 1458759173.727548900
+
+[savedsearches/Penalties_List]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449169722.199922900
+
+[views/penalty_summary]
+owner = nobody
+version = 6.2.2
+modtime = 1449170437.010656100
+
+[savedsearches/HBSS_HIPS_NOT_ENABLED]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425175.715297800
+
+[savedsearches/HBSS_HIPS_NOT_ENFORCING]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425171.621332600
+
+[savedsearches/HBSS_HIPS_NOT_PREVENTING_HIGH]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425159.651957400
+
+[savedsearches/HBSS_HIPS_SERVICE_NOT_AUTOMATIC]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454427131.739392000
+
+[savedsearches/HBSS_HIPS_SERVICE_NOT_RUNNING]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454427258.996042400
+
+[savedsearches/HBSS_UPDATE_HIPS]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454427188.820499700
+
+[savedsearches/HBSS_UPDATE_HIPS_CONTENT]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454427390.424785700
+
+[lookups/hostList2.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449499769.440293900
+
+[savedsearches/AE_APP_DOES_NOT_SUPPORT_ASLR]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456948720.501755500
+
+[savedsearches/AE_APP_DOES_NOT_SUPPORT_SEHOP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456506117.551220000
+
+[savedsearches/AE_ASLR_CONFIG_NOT_DEFINED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423115.279493900
+
+[savedsearches/AE_ASLR_CONFIG_WEAK]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423004.179938600
+
+[savedsearches/AE_ASLR_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423018.024411900
+
+[savedsearches/AE_OS_OUTDATED_FOR_ASLR]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421443.504627900
+
+[savedsearches/AE_OS_OUTDATED_FOR_MANDATORY_ASLR]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422366.037213800
+
+[savedsearches/AE_OS_OUTDATED_FOR_SEHOP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422336.145027000
+
+[savedsearches/AE_SEHOP_IS_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456428798.898434300
+
+[savedsearches/AE_SEHOP_IS_DISABLED_WIN8]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455131929.210622100
+
+[savedsearches/AE_SEHOP_NOT_CONFIGURED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422602.112051400
+
+[savedsearches/AE_SEHOP_OVERRIDDEN_FOR_APP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422620.581766400
+
+[savedsearches/AE_ASLR_IMPLEMENTATION_WEAK]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422931.238625800
+
+[savedsearches/HBSS_HIPS_NOT_LOGGING_LOW]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425164.011559600
+
+[savedsearches/HBSS_HIPS_NOT_PREVENTING_MEDIUM]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454427246.948537900
+
+[savedsearches/AW_SRP_MISSING_EXE_TYPE]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425416.009104200
+
+[lookups/SRP-whitelistPath.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449587892.713765100
+
+[lookups/SRP-blacklistPath.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449588373.032648500
+
+[savedsearches/AW_SRP_BLACKLIST_RULE_MISSING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454426898.680337100
+
+[savedsearches/AW_SRP_WHITELIST_RULE_MISSING]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425060.256138800
+
+[savedsearches/AW_SRP_RULE_NOT_ENFORCED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454424921.155119200
+
+[savedsearches/AE_ABLE_TO_MAP_NULL_PAGE]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454418937.061142500
+
+[savedsearches/AE_CFG_DISABLED_FOR_OS]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456506685.633918400
+
+[savedsearches/AE_CFG_DISABLED_MO_FOR_OS]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456506653.911808200
+
+[savedsearches/AE_CFG_NOT_PRESENT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456506577.648695800
+
+[savedsearches/AE_KSEHOP_IS_DISABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455131000.130818600
+
+[savedsearches/AE_KSEHOP_NOT_CONFIGURED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455114054.401494400
+
+[savedsearches/AE_NP_NOT_CONFIGURED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.3.3
+modtime = 1458822719.519923500
+
+[savedsearches/AE_NP_NOT_PRESENT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.3.3
+modtime = 1458759677.591645000
+
+[savedsearches/AE_OS_OUTDATED_FOR_CFG]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421508.961173700
+
+[savedsearches/AE_OS_OUTDATED_FOR_KSEHOP]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421714.737552100
+
+[savedsearches/AE_OS_OUTDATED_FOR_NULL_PAGE_PROTECTION]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454421942.874474400
+
+[savedsearches/AE_SEHOP_NOT_PRESENT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422607.549835100
+
+[savedsearches/AE_CERTPADDING_NOT_ENABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423405.419657000
+
+[savedsearches/AE_CERTPADDING_NOT_EXIST]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456506350.607273500
+
+[savedsearches/AE_CERTPADDING_NOT_PRESENT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454420274.709171900
+
+[savedsearches/AE_OS_OUTDATED_FOR_SECURE_SEARCH_PATH]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422331.410404200
+
+[savedsearches/AE_SSP_NOT_ENABLED]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422632.332380000
+
+[savedsearches/AE_SSP_NOT_EXIST]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422641.567238000
+
+[savedsearches/AE_SSP_NOT_PRESENT]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454422674.928356800
+
+[savedsearches/AW_Skip_Category_lookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449756860.974865500
+
+[savedsearches/HBSS_HIPS_NOT_INSTALLED]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454425167.761756100
+
+[lookups/sami_penalties_lookup.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454431511.249513600
+
+[lookups/AW_Category_Skip_lookup.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1449751373.388109300
+
+[lookups/sami_fix_lookup.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454431663.757482700
+
+[savedsearches/OSPD_NO_OS_PATCHES]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450106136.989910200
+
+[savedsearches/OSPD_NO_OS_SECURITY_PATCHES]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450106142.865217700
+
+[savedsearches/OSPD_OLD_OS_SECURITY_PATCH_AVERAGE_DAYS]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450106148.740524200
+
+[savedsearches/OSPD_OLD_OS_SECURITY_PATCH_DATE]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450106188.461350300
+
+[props/dcList/EXTRACT-SamAccountName%2Cname%2CdistinguishedName]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450190395.538856400
+
+[macros/get_required_av_engine_version]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450191755.417354000
+
+[macros/get_vse_versions]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450191515.373559600
+
+[savedsearches/PtH_DOMAIN_ADMIN_LOGON_WORKSTATION]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454507986.581682400
+
+[savedsearches/PtH_DOMAIN_ADMIN_LOGON_SERVER]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454507978.612106200
+
+[savedsearches/PtH_CONFIGURE_EVENT_LOG]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454507792.952250700
+
+[macros/get_hips_version]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1453320002.262822500
+
+[props/dcList/EXTRACT-SamAccountName%2CName%2CdistinguishedName]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450441309.576249600
+
+[props/hostList/EXTRACT-hostName%2ClastLogon]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450444015.313878400
+
+[lookups/ruleSet_lookup.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1450727939.800177000
+
+[savedsearches/Missing%20Measures%20Per%20Host]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455645483.705686600
+
+[savedsearches/AVFRS_MISSING_DATA]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302520.175416300
+
+[savedsearches/AVFRS_ARTEMIS_SERVER_UNEXPECTED]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423730.171002700
+
+[savedsearches/AVFRS_ARTEMIS_SERVER_UNREACHABLE]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1454423738.640195600
+
+[savedsearches/HBSS_MISSING_DATA]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302540.174268100
+
+[savedsearches/MODERN_OS_MISSING_DATA]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302577.344010200
+
+[savedsearches/MISSING_DATA_METRIC]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302561.376176800
+
+[savedsearches/PtH_MISSING_DATA]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302587.999648400
+
+[indexes/sami_script]
+owner = nobody
+version = 6.2.2
+modtime = 1455190834.507619800
+
+[savedsearches/AE_MISSING_DATA]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455302504.191958700
+
+[macros/skip_aw_category%282%29]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455736367.371153700
+
+[savedsearches/AW_MISSING_DATA]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455645216.507964200
+
+[transforms/AW_ruleSet_lookup]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455650648.262664700
+
+[lookups/ruleSets2.csv]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455651229.113014400
+
+[transforms/AW_BlacklistedPath_lookup]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455653935.372809000
+
+[macros/parse_aw_rule]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1455909970.468455000
+
+[props/stash/EXTRACT-ruleSet]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456323930.212911200
+
+[props/stash/EXTRACT-path]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456412818.153998100
+
+[props/stash/EXTRACT-ruleName]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456411955.779422700
+
+[lookups/hostList.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1456838563.597779200
+
+[transforms/SAMIFixLookup]
+access = read : [ * ]
+export = none
+owner = nobody
+version = 6.2.2
+modtime = 1457120448.372670900

@@ -1,0 +1,2 @@
+@ECHO OFF
+powershell -Command "& { get-adgroup -filter * | where-object {$_.SID -like \"S-*-512\"} |  get-adgroupmember | select-object SamAccountName, name, distinguishedName | format-table -Autosize -Hidetableheaders | out-string -width 1024  }"

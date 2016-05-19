@@ -1,0 +1,710 @@
+<form stylesheet="dark.css" script="tokenTest.js">
+  <label>Metric Summary - last 24 hours</label>
+  <fieldset submitButton="false">
+    <input type="multiselect" token="metric" searchWhenChanged="true">
+      <label>Metric</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>index=sami_summary | dedup metric | table metric</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>metric</fieldForLabel>
+      <fieldForValue>metric</fieldForValue>
+      <default>*</default>
+      <valuePrefix>metric="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+    </input>
+    <input type="multiselect" token="osRole" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>|inputlookup OSLookup | dedup osRole | table osRole</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>osRole</fieldForLabel>
+      <fieldForValue>osRole</fieldForValue>
+      <default>*</default>
+      <valuePrefix>osRole="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+    </input>
+    <input type="multiselect" token="osVersion" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>|inputlookup OSLookup | dedup osVersion | table osVersion</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>osVersion</fieldForLabel>
+      <fieldForValue>osVersion</fieldForValue>
+      <default>*</default>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>osVersion="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+    </input>
+    <input type="multiselect" token="host" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>index=sami_summary metric=MISSING_DATA item=active | eval host=orig_host | dedup host | sort host | table host</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>host="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Average AVFRS Score</title>
+        <search>
+          <query>index=sami_summary metric=AVFRS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active"  | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats count as penaltyCount by host, measure, penalty | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Average AE Score</title>
+        <search>
+          <query>index=sami_summary metric=AE | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats count as penaltyCount by host, measure, penalty | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount)))) | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Average AW Score</title>
+        <search>
+          <query>index=sami_summary metric=AW | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | rex field=measure "(?&lt;AW_Cat&gt;SRP|APPLOCKER)_.*" | stats count as penaltyCount by host, measure, penalty, AW_Cat  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount)))) | stats sum(eval(ln(score))) as sumLogScores by host, AW_Cat | eval TotalScore=round(1+9*exp(sumLogScores),3) | stats max(TotalScore) as TotalScore by host  | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Average HBSS Score</title>
+        <search>
+          <query>index=sami_summary metric=HBSS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ |  stats count as penaltyCount by host, measure, penalty  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Average MOS Score</title>
+        <search>
+          <query>index=sami_summary metric=MOS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ |  stats count as penaltyCount by host, measure, penalty  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Average PtH Score</title>
+        <search>
+          <query>index=sami_summary metric=PtH | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ |  stats count as penaltyCount by host, measure, penalty  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>AVFRS</title>
+        <searchString>index=sami_summary metric=AVFRS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</searchString>
+        <earliestTime>-24h@h</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=AVFRS | search measure!=MISSING_DATA measure!=ARTEMIS_SENSITIVITY_LOW AND measure!=ARTEMIS_SENSITIVITY_VERY_LOW | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=AVFRS earliest=-24h@h  measure!=MISSING_DATA | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,"None") | where missing!="None" | fields host metric missing] | eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=if(isnull(item), null(), min(penalty,100)) | eval _time=now() | table host, item, penalty _time | sort item by host</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>AE</title>
+        <search>
+          <query>index=sami_summary metric=AE | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=AE measure!=MISSING_DATA measure!=NP_IS_DISABLED | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=AE measure!=MISSING_DATA earliest=-24h@h earliest=-24h@h | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | join type=outer [search index=sami_summary metric=AE measure=ASLR_CONFIG_NOT_DEFINED earliest=-24h@h | eval host=upper(orig_host) | eval aslrConfigPenalty=penalty | fields host aslrConfigPenalty] | join type=outer [search index=sami_summary metric=AE measure=OS_OUTDATED_FOR_FONT_BLOCKING earliest=-24h@h | eval host=upper(orig_host) | eval fontBlockingOSPenalty=penalty | fields host fontBlockingOSPenalty] | join type=outer [search index=sami_summary metric=AE measure=OS_NO_SECURE_BOOT earliest=-24h@h | eval host=upper(orig_host) | eval secureBootOSPenalty=penalty | fields host secureBootOSPenalty]| eval allMeasures=if(aslrConfigPenalty&gt;0,mvfilter(NOT match(allMeasures,"ASLR_CONFIG_WEAK|ASLR_DISABLED")),allMeasures) | eval allMeasures=if(fontBlockingOSPenalty&gt;0,mvfilter(NOT match(allMeasures,"FONT_BLOCKING_IS_DISABLED|FONT_BLOCKING_MO_IS_DISABLED")),allMeasures) | eval allMeasures=if(secureBootOSPenalty&gt;0,mvfilter(NOT match(allMeasures,"LEGACY_BIOS|SECURE_BOOT_NOT_ENABLED")),allMeasures) | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,"None") | where missing!="None" | fields host metric missing] | eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=if(isnull(item), null(), min(penalty,100))  | eval _time=now() | table host, item, penalty _time | sort item by host</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>AW</title>
+        <search>
+          <query>index=sami_summary metric=AW | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=AW | search measure!=MISSING_DATA measure!=APPLOCKER_BAD_PUBLISHER measure!=APPLOCKER_NO_BLACKLIST_RULES measure!=APPLOCKER_NO_USERPROFILE_RULES measure!=NO_WHITELISTING | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=AW measure!=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,"None") | fields host metric missing] | search metric!=MISSING_DATA | eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=min(penalty,100) | eval _time=now() | table host, item, penalty _time | sort item by host</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>HBSS</title>
+        <search>
+          <query>index=sami_summary metric=HBSS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch"></option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=HBSS | search measure!=MISSING_DATA | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=HBSS measure!=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,null()) | fields host metric missing] | search metric!=MISSING_DATA| eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=if(isnull(item), null(), min(penalty,100))   | eval _time=now() | table host, item, penalty _time | sort item by host</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>MOS</title>
+        <search>
+          <query>index=sami_summary metric=MOS | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=MOS | search measure!=MISSING_DATA measure!="IS_WIN10" | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=MOS measure!=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,null()) | fields host metric missing] | search metric!=MISSING_DATA | eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=if(isnull(item), null(), min(penalty,100)) | eval _time=now() | table host, item, penalty _time | sort item by host</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>PtH</title>
+        <search>
+          <query>index=sami_summary metric=PtH | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | dedup host | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | stats dc(host)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="beforeLabel"></option>
+        <option name="underLabel">Hosts</option>
+        <option name="afterLabel"></option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+        <option name="link.visible">true</option>
+        <option name="linkFields">underLabel, result</option>
+        <option name="linkSearch">index=sami_summary metric=MISSING_DATA earliest=-24h@h | eval host=upper(orig_host) | search item="active" | dedup host | lookup OSLookup host as host output osVersion,osRole | search osRole=* osVersion=* | join type=outer max=0 host [| inputlookup SAMIPenaltiesLookup | search metric=PtH | search measure!=BLOCK_W2W_TRAFFIC measure!=DOMAIN_ADMIN_LOGON_SERVER measure!=DOMAIN_ADMIN_LOGON_WORKSTATION | stats values(measure) as allMeasures by metric | join type=outer max=0 measure [search index=sami_summary metric=PtH earliest=-24h@h | eval host=upper(orig_host) | stats values(measure) as hostMeasures by host | fields host hostMeasures] | mvexpand allMeasures | eval missing=if(isnull(mvfind(hostMeasures,allMeasures)),allMeasures,null()) | fields host metric missing] | search metric!=MISSING_DATA | eval measure=missing | `penalty_lookup` | stats values(missing) as item sum(penalty_value) as penalty by host | eval penalty=if(isnull(item),null(),min(penalty,100)) | eval _time=now() | table host, item, penalty _time</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Host Remediations</title>
+        <search>
+          <query>index=sami_summary $metric$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | eval Mitem=item | fields host, Mitem] | search Mitem="active" | search $host$ | dedup host, metric, measure, penalty, item | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | lookup sami_fix_lookup.csv measure as measure output remediation | eval remediation=if(measure!="APPLOCKER_BLACKLIST_RULE_MISSING" AND isnull(ruleName), replace(remediation,"\'\{0\}\'",item) , replace(remediation,"\'\{0\}\'",path)) | eval remediation=if(measure=="APPLOCKER_BLACKLIST_RULE_MISSING" AND isnotnull(ruleName), replace(remediation,"\'\{1\}\'", "\"".ruleName."\"") , replace(remediation,"rule named \'\{1\}\'","rules ")) | eval remediation=if(measure=="APPLOCKER_BLACKLIST_RULE_MISSING", replace(remediation,"\'\{2\}\'", ruleSet) , remediation) | sort -penalty | stats list(penalty) sum(penalty) count by host, remediation | sort host, -sum(penalty)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[search/?q=index%3Dsami_summary%20orig_host%3D%22$row.host$%22%20$metric$%20metric!%3DMISSING_DATA%20penalty%3E0%20%7C%20eval%20host%3Dupper(orig_host)%20%7C%20join%20type%3Douter%20host%20%5Bsearch%20index%3Dsami_summary%20metric%3DMISSING_DATA%20%7C%20eval%20host%3Dorig_host%20%7C%20eval%20Mitem%3Ditem%20%7C%20fields%20host%2C%20Mitem%5D%20%7C%20search%20Mitem%3D%22active%22%20%7C%20search%20$host$%20%7C%20lookup%20OSLookup%20host%20as%20host%20output%20osVersion%2CosRole%20%7C%20search%20$osRole$%20$osVersion$%20%7C%20lookup%20sami_fix_lookup.csv%20measure%20as%20measure%20output%20remediation%20%7C%20eval%20remediation%3Dreplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Citem)%20%7C%20where%20remediation%3D%3D%22$row.remediation$%22%20%7C%20table%20host%2Cmetric%2Cmeasure%2Cremediation%2Citem%2Cpenalty%20%7C%20rename%20item%20as%20%22current%20value%22%20%7Csort%20-penalty&earliest=$earliest$&latest=$latest$]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Network Remediations</title>
+        <search>
+          <query>index=sami_summary $metric$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | eval Mitem=item | fields host, Mitem] | search Mitem="active" | search $host$ | dedup host, metric, measure, penalty, item | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | lookup sami_fix_lookup.csv measure as measure output remediation | eval remediation=if(measure!="APPLOCKER_BLACKLIST_RULE_MISSING" AND isnull(ruleName), replace(remediation,"\'\{0\}\'",item) , replace(remediation,"\'\{0\}\'",path)) | eval remediation=if(measure=="APPLOCKER_BLACKLIST_RULE_MISSING" AND isnotnull(ruleName), replace(remediation,"\'\{1\}\'", "\"".ruleName."\"") , replace(remediation,"rule named \'\{1\}\'","rules ")) | eval remediation=if(measure=="APPLOCKER_BLACKLIST_RULE_MISSING", replace(remediation,"\'\{2\}\'", ruleSet) , remediation) | sort -penalty | stats  sum(penalty) count by  remediation | sort  -sum(penalty)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[search/?q=index%3Dsami_summary%20$metric$%20metric!%3DMISSING_DATA%20penalty%3E0%20%7C%20eval%20host%3Dupper(orig_host)%20%7C%20join%20type%3Douter%20host%20%5Bsearch%20index%3Dsami_summary%20metric%3DMISSING_DATA%20%7C%20eval%20host%3Dorig_host%20%7C%20eval%20Mitem%3Ditem%20%7C%20fields%20host%2C%20Mitem%5D%20%7C%20search%20Mitem%3D%22active%22%20%7C%20search%20$host$%20%7C%20lookup%20OSLookup%20host%20as%20host%20output%20osVersion%2CosRole%20%7C%20search%20$osRole$%20$osVersion$%20%7C%20lookup%20sami_fix_lookup.csv%20measure%20as%20measure%20output%20remediation%20%7C%20eval%20remediation%3Dreplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Citem)%20%7C%20where%20remediation%3D%3D%22$row.remediation$%22%20%7C%20table%20host%2Cmetric%2Cmeasure%2Cremediation%2Citem%2Cpenalty%20%7C%20rename%20item%20as%20%22current%20value%22%20%7Csort%20-penalty&earliest=$earliest$&latest=$latest$]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Average Overall Score</title>
+        <search>
+          <query>index=sami_summary $metric$ | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | bin _time span=1d | stats count as penaltyCount by host, measure, penalty, metric, _time, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | table host, TotalScore | stats avg(TotalScore) AS "AverageScore" | eval AverageScore=round(AverageScore,1)</query>
+          <earliest>-24h@h</earliest>
+        </search>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">markerGauge</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.rangeValues">[0,"7","8.5","10"]</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.gaugeColors">[0xBF3030,0xFFE800,0x84E900]</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="linkView">search</option>
+      </chart>
+    </panel>
+    <panel>
+      <input type="time" token="time" searchWhenChanged="true">
+        <label></label>
+        <default>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
+        </default>
+      </input>
+      <chart>
+        <title>Average Score</title>
+        <search>
+          <query>index=sami_summary $metric$ | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | bin _time span=1d | stats count as penaltyCount by host, measure, penalty, metric, _time, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | eval time=strftime(_time,"%y-%m-%d") | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))| stats sum(eval(ln(score))) as sumLogScores by host, metric, time | eval TotalScore=round(1+9*exp(sumLogScores),3) | chart avg(TotalScore) AS AverageScore by time, metric</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Metric Findings Host Count Chart</title>
+        <search>
+          <query>index=sami_summary $metric$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | chart limit=100 dc(host) as HostInstanceCount over metric by measure</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.data.count">100000</option>
+        <option name="charting.chart.resultTruncationLimit">100000</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[search/?q=index%3Dsami_summary%20penalty%3E0%20metric%3D$click.value$%20measure%3D$click.name2$%20%7C%20rename%20orig_host%20as%20host%20%7C%20eval%20host%3Dupper(host)%20%7C%20join%20type%3Douter%20host%20%5Bsearch%20index%3Dsami_summary%20metric%3DMISSING_DATA%20%7C%20eval%20host%3Dorig_host%20%7C%20eval%20Mitem%3Ditem%20%7C%20fields%20host%2C%20Mitem%5D%20%7C%20search%20Mitem%3D%22active%22%20%7C%20search%20(host%3D%22*%22)%20%7C%20lookup%20OSLookup%20host%20as%20host%20output%20osVersion%2CosRole%20%7C%20search%20(osRole%3D%22*%22)%20(osVersion%3D%22*%22)%20%7C%20%60skip_aw_category(measure%2Chost)%60%20%7C%20lookup%20sami_fix_lookup.csv%20measure%20as%20measure%20output%20remediation%20%7C%20eval%20remediation%3Dif(match(remediation%2C%22%5C%7B0%5C%7D%22)%2Cif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(path)%2Creplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Cpath)%2Creplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Citem))%2Cremediation)%20%7C%20eval%20remediation%3Dif(match(remediation%2C%22%5C%7B1%5C%7D%22)%2Cif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(ruleName)%2Creplace(remediation%2C%22%5C%27%5C%7B1%5C%7D%5C%27%22%2C%22%5C%22%22.ruleName.%22%5C%22%22)%2Creplace(remediation%2C%22rule%20named%20%5C%27%5C%7B1%5C%7D%5C%27%22%2C%22rules%20%22))%2Cremediation)%20%7C%20eval%20remediation%3Dif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(ruleSet)%2C%20replace(remediation%2C%22%5C%27%5C%7B2%5C%7D%5C%27%22%2C%20ruleSet)%20%2C%20remediation)%20%7C%20stats%20sum(penalty)%20values(host)%20by%20metric%2Cmeasure%2Cremediation&earliest=$earliest$&latest=$latest$]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <input type="time" token="time1" searchWhenChanged="true">
+        <label></label>
+        <default>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
+        </default>
+      </input>
+      <chart>
+        <title>Penalty Summation by Measure</title>
+        <search>
+          <query>index=sami_summary $metric$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | bin _time span=1d | stats count as penaltyCount by host, measure, penalty, metric, category, _time | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | eval time=strftime(_time,"%y-%m-%d") | chart limit=200 sum(penalty) as sumPenalty by  time, measure</query>
+          <earliest>$time1.earliest$</earliest>
+          <latest>$time1.latest$</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">undefined</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" token="time1">
+        <label></label>
+        <default>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
+        </default>
+      </input>
+      <chart>
+        <title>Host Status</title>
+        <search>
+          <query>index=sami_summary metric=MISSING_DATA | eval host=upper(orig_host) | lookup OSLookup host as host output osRole | fillnull value=noData osRole | bin _time span=1d | eval time=strftime(_time,"%y-%m-%d") | eval status=item+" - "+osRole | chart dc(host) over time by status</query>
+          <earliest>$time1.earliest$</earliest>
+          <latest>$time1.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <drilldown>
+          <set token="status">$click.name2$</set>
+          <set token="time">$click.value$</set>
+          <set token="hostStatusTime.earliest">$time1.earliest$</set>
+          <set token="hostStatusTime.latest">$time1.latest$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>$status$ Hosts for $time$</title>
+        <search>
+          <query>index=sami_summary metric=MISSING_DATA | eval host=upper(orig_host) | lookup OSLookup host as host output osRole | fillnull value=noData osRole | eval time=strftime(_time,"%y-%m-%d") | dedup host time | eval status=item+" - "+osRole | search time="$time$" status="$status$" | table host</query>
+          <earliest>$hostStatusTime.earliest$</earliest>
+          <latest>$hostStatusTime.latest$</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Overall Score By Host</title>
+        <search>
+          <query>index=sami_summary $metric$ | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup sami_penalties_lookup.csv measure as measure output category | stats count as penaltyCount by host, measure, penalty, metric, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0  | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))  | stats sum(eval(ln(score))) as sumLogScores by host  | eval TotalScore=round(1+9*exp(sumLogScores),3) | sort TotalScore | lookup OSLookup host as host output osVersion,ServicePack,osRole,osArch | search $osRole$  $osVersion$ | eval TotalScore=round(TotalScore,1) | table host, TotalScore, osVersion,ServicePack,osRole,osArch</query>
+          <earliest>-24h@h</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Metric Scores by Host</title>
+        <search>
+          <query>index=sami_summary metric!=MISSING_DATA | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | stats count as penaltyCount by host, measure, penalty, metric, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | eval score=max(0.0001,((pow(100-penalty,penaltyCount)/pow(100,penaltyCount))))| stats sum(eval(ln(score))) as sumLogScores by host, metric | eval TotalScore=round(1+9*exp(sumLogScores),3) | chart avg(TotalScore) AS "Average Score" by  host, metric</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="multiselect" token="measure" searchWhenChanged="true">
+        <choice value="*">All</choice>
+        <search>
+          <query>index=sami_summary $metric$ | dedup measure | sort measure | table measure</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <fieldForLabel>measure</fieldForLabel>
+        <fieldForValue>measure</fieldForValue>
+        <default>*</default>
+        <prefix>(</prefix>
+        <suffix>)</suffix>
+        <valuePrefix>measure="</valuePrefix>
+        <valueSuffix>"</valueSuffix>
+        <delimiter> OR </delimiter>
+      </input>
+      <table>
+        <title>Failed Measures per Host</title>
+        <search>
+          <query>index=sami_summary $metric$ $measure$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | eval Mitem=item | fields host, Mitem] | search Mitem="active" | search $host$ | dedup host, metric, measure, penalty, item | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | stats count as penaltyCount by host, measure, penalty, metric, item, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | sort -penalty, metric, measure | table host, metric, measure, penalty, item</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Measure Findings Host Count</title>
+        <search>
+          <query>index=sami_summary $metric$ penalty&gt;0 | eval host=upper(orig_host) | join type=outer host [search index=sami_summary metric=MISSING_DATA | eval host=orig_host | fields host, item] | search item="active" | search $host$ | lookup OSLookup host as host output osVersion,osRole | search $osRole$ $osVersion$ | lookup sami_penalties_lookup.csv measure as measure output category | stats count as penaltyCount by host, measure, penalty, metric, category | lookup AW_Category_Skip_lookup.csv host as host output skip_aw_cat | eval skip=if(category==skip_aw_cat,1,0) | search skip=0 | stats count(host) as hostCount sum(penaltyCount) as instanceCount by metric, measure, penalty | sort -penalty, -instanceCount</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[search/?q=index%3Dsami_summary%20penalty%3E0%20metric%3D$row.metric$%20measure%3D$row.measure$%20%7C%20rename%20orig_host%20as%20host%20%7C%20eval%20host%3Dupper(host)%20%7C%20join%20type%3Douter%20host%20%5Bsearch%20index%3Dsami_summary%20metric%3DMISSING_DATA%20%7C%20eval%20host%3Dorig_host%20%7C%20eval%20Mitem%3Ditem%20%7C%20fields%20host%2C%20Mitem%5D%20%7C%20search%20Mitem%3D%22active%22%20%7C%20search%20(host%3D%22*%22)%20%7C%20lookup%20OSLookup%20host%20as%20host%20output%20osVersion%2CosRole%20%7C%20search%20(osRole%3D%22*%22)%20(osVersion%3D%22*%22)%20%7C%20%60skip_aw_category(measure%2Chost)%60%20%7C%20lookup%20sami_fix_lookup.csv%20measure%20as%20measure%20output%20remediation%20%7C%20eval%20remediation%3Dif(match(remediation%2C%22%5C%7B0%5C%7D%22)%2Cif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(path)%2Creplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Cpath)%2Creplace(remediation%2C%22%5C%27%5C%7B0%5C%7D%5C%27%22%2Citem))%2Cremediation)%20%7C%20eval%20remediation%3Dif(match(remediation%2C%22%5C%7B1%5C%7D%22)%2Cif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(ruleName)%2Creplace(remediation%2C%22%5C%27%5C%7B1%5C%7D%5C%27%22%2C%22%5C%22%22.ruleName.%22%5C%22%22)%2Creplace(remediation%2C%22rule%20named%20%5C%27%5C%7B1%5C%7D%5C%27%22%2C%22rules%20%22))%2Cremediation)%20%7C%20eval%20remediation%3Dif(measure%3D%3D%22APPLOCKER_BLACKLIST_RULE_MISSING%22%20AND%20isnotnull(ruleSet)%2C%20replace(remediation%2C%22%5C%27%5C%7B2%5C%7D%5C%27%22%2C%20ruleSet)%20%2C%20remediation)%20%7C%20stats%20sum(penalty)%20values(host)%20by%20metric%2Cmeasure%2Cremediation&earliest=$earliest$&latest=$latest$]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

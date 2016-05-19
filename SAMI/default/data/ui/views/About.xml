@@ -1,0 +1,29 @@
+<dashboard stylesheet="style.css">
+    <label>About</label>
+    <row>
+
+        <!-- BEGIN PANEL 1 -->
+		<html>
+            <h1><center>Splunk Assessment of Mitigation Implementations</center></h1>
+            
+			<h3><center><font color="#888888"> Version 1.0</font></center></h3>
+            <br></br>
+			<h5><p><em><font color="#BBBBBB">*Please note that mitigations will need to be updated in the App such as McAfee Version numbers. Refer to the Limitations, Maintenance section of the included User Manual.</font></em></p></h5>
+			
+			<br><h2><u><font color="#6699FF">App Overview </font></u></h2></br>
+	            <p>  Mitigation implementations have not traditionally been evaluated or prioritized.  NSA’s Information Assurance Directorate recommends mitigation strategies but there are few methods to validate proper implementation and prioritize fixes. The SAMI application was developed to monitor the degree to which specific aspects of the IAD Top 10 Mitigation Strategies  have been deployed on Windows endpoints.  It monitors data related to the implementation of specific mitigations and returns prioritized recommendations to more completely implement those recommendations.  The application can be used to determine a network’s mitigation implementation status and can be monitored over time to demonstrate improvements and identify changes that negatively impact mitigations. </p>
+				
+                <br>SAMI evaluates several metrics: </br>
+                    <ul>
+					  <li>Modern Operating System (MOS)</li>
+		              <li>Anti-Virus File Reputation Service (AVFRS)</li>
+					  <li>Host Intrusion Prevention System (HIPS)</li>
+					  <li>Application Whitelisting (AW)</li>
+					  <li>Anti-Exploitation (AE)</li>
+					  <li>Pass-theHash (PtH)</li>
+					</ul>						
+		</html>
+	
+  </row>
+   
+</dashboard>

@@ -1,0 +1,148 @@
+metric,measure,remediation,id2
+AE,ABLE_TO_MAP_NULL_PAGE,Upgrade to Windows 7 SP1 and ensure system is fully patched,UPGRADE_TO_7SP1_PATCH
+AE,ABLE_TO_MAP_NULL_PAGE,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,APP_DOES_NOT_SUPPORT_ASLR,Upgrade the application '{0}' to a version that is built with ASLR support,UPGRADE_TO_APP_WITH_DEP
+AE,APP_DOES_NOT_SUPPORT_SEHOP,"Under the Image File Execution Options registry key for the application '{0}', set the DisableExceptionChainValidation registry value to 0",SET_DECV_FOR_APP
+AE,APP_NOT_OPTED_IN_FOR_DEP,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,APP_NOT_OPTED_IN_FOR_DEP,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,APP_NOT_OPTED_IN_FOR_DEP,"On Windows 8 configure the MitigationsOptions registry value for the application '{0}' under the Image File Execution Options key to enable DEP",MO_ENABLE_DEP_ON_APP2
+AE,APP_NOT_OPTED_IN_FOR_DEP,"Set the ExecuteOptions registry value for the application '{0}', under the Image File Execution Options key, to zero to enable DEP for the application",SET_EO_FOR_APP
+AE,APP_NOT_OPTED_IN_FOR_DEP,Upgrade the application '{0}' to a version that is built with DEP support,UPGRADE_APP_FOR_NXCOMPAT
+AE,APP_OPTED_OUT_FROM_DEP,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,APP_OPTED_OUT_FROM_DEP,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,APP_OPTED_OUT_FROM_DEP,"On Windows 8+, configure the MitigationsOptions registry value for the application '{0}' under the Image File Execution Options key to enable DEP",MO_ENABLE_DEP_ON_APP2
+AE,APP_OPTED_OUT_FROM_DEP,Set application AppCompatFlags registry value for application '{0}' to EnableNxShowUI or EnableNxHideUI,ACF_ENABLE_DEP_FOR_APP
+AE,ASLR_CONFIG_NOT_DEFINED,"On operating system versions 6.0-6.1, the MoveImages value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ should be set to 0xFFFFFFFF, so that ASLR is AlwaysOn",SET_MOVEIMAGES
+AE,ASLR_CONFIG_NOT_DEFINED,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,ASLR_CONFIG_WEAK,"On operating system versions 6.0-6.1, the MoveImages value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ should be set to 0xFFFFFFFF, so that ASLR is AlwaysOn",SET_MOVEIMAGES
+AE,ASLR_CONFIG_WEAK,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,ASLR_DISABLED,"On operating system versions 6.0-6.1, the MoveImages value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ should be set to 0xFFFFFFFF, so that ASLR is AlwaysOn",SET_MOVEIMAGES
+AE,ASLR_DISABLED,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,ASLR_IMPLEMENTATION_WEAK,"Upgrade to 64-bit operating system, Windows 7 or later",UPGRADE_TO_64BIT_7_PLUS
+AE,CERTPADDING_NOT_ENABLED,Follow instructions in Microsoft Security Advisory 2915720 to enable certificate padding checks,FOLLOW_291572
+AE,CERTPADDING_NOT_EXIST,Follow instructions in Microsoft Security Advisory 2915720 to enable certificate padding checks,FOLLOW_291572
+AE,CERTPADDING_NOT_PRESENT,Install the certificate padding patch and follow instructions in Microsoft Security Advisory 2915720 to enable certificate padding checks,INSTALL_CERTPADDING_PATCH
+AE,CFG_DISABLED_FOR_OS,Delete the EnableCFG registry value under HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\ or set its value to 1,ENABLE_CFG
+AE,CFG_DISABLED_MO_FOR_OS,Set the MitigationOptions registry value under HKLM\System\CurrentControlSet\Control\Session Manager\Kernel\ to 0x{0:2X} to enable Control Flow Guard,ENABLE_CFG_MO
+AE,CFG_NOT_PRESENT,Install patch KB3000850 on Windows 8.1/Windows Server 2012 R2,UPGRADE_TO_8_1_PATCH
+AE,CFG_NOT_PRESENT,Upgrade to Windows 10/Windows Server 2016 or later,UPGRADE_TO_WINDOWS_10
+AE,DEP_DISABLED,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,DEP_DISABLED,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,DEP_DISABLED32,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,DEP_DISABLED32,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,DEP_OVERRIDDEN_FOR_APP,Delete or configure the MitigationsOptions registry value for the application '{0}' under the Image File Execution Options key to enable DEP,MO_ENABLE_DEP_ON_APP
+AE,DEP_TOO_LOW,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,DEP_TOO_LOW,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,DEP_TOO_LOW32,"Set boot DEP policy (in boot.ini or the BCD Store) to AlwaysOn. On Windows 8+, ensure this is not overridden by the system MitigationOptions registry value",SET_BOOT_DEP_POLICY
+AE,DEP_TOO_LOW32,"On Windows 8+, configure the MitigationOptions registry value to enforce DEP as AlwaysOn with the Policy Override bit",SET_MO_DEP
+AE,FONT_BLOCKING_IS_DISABLED,In Group Policy go to Computer Configuration > Administrative Templates > System > Mitigation Options and set Untrusted Font Blocking to Enabled. Then select 'Block untrusted fonts and log events' from the Mitigation Options drop down menu,SET_FONT_BLOCKING
+AE,FONT_BLOCKING_MO_IS_DISABLED,In Group Policy go to Computer Configuration > Administrative Templates > System > Mitigation Options and set Untrusted Font Blocking to Enabled. Then select 'Block untrusted fonts and log events' from the Mitigation Options drop down menu,SET_FONT_BLOCKING
+AE,FONT_BLOCKING_NOT_CONFIGURED,In Group Policy go to Computer Configuration > Administrative Templates > System > Mitigation Options and set Untrusted Font Blocking to Enabled. Then select 'Block untrusted fonts and log events' from the Mitigation Options drop down menu,SET_FONT_BLOCKING
+AE,HW_NO_SMAP,Purchase systems that support Supervisor Mode Access Prevention (Broadwell chipset and successors) during the next acquisition cycle to harden the system against kernel exploits,SMAP
+AE,HW_NO_SMEP,Purchase systems that support Supervisor Mode Execution Prevention (Ivy Bridge chipset and successors) during the next acquisition cycle to harden the system against kernel exploits,SMEP
+AE,HW_OUTDATED_FOR_DEP,Upgrade to a system with a newer processor that supports DEP,UPGRADE_TO_NEWER_PROCESSOR
+AE,KSEHOP_IS_DISABLED,"On Windows 8.1+ x86 only, configure the KernelSEHOPEnabled value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to 1 to enable kernel SEHOP",SET_KSEHOP
+AE,KSEHOP_NOT_CONFIGURED,"On Windows 8.1+ x86 only, configure the KernelSEHOPEnabled value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to 1 to enable kernel SEHOP",SET_KSEHOP
+AE,LEGACY_BIOS,"If the system has a UEFI BIOS, then change it from Legacy/Compatibility Support Mode to UEFI Mode (requires OS re-install) in BIOS Setup at boot. If the system does not have a UEFI BIOS, then purchase a system with UEFI BIOS during the next acquisition cycle and ensure it is in UEFI Mode before OS installation",UEFI_BIOS
+AE,NP_IS_DISABLED,"On 32-bit Windows 7, set the EnableLowVaAccess registry value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ to 0",SET_NP
+AE,NP_NOT_CONFIGURED,"On 32-bit Windows 7, set the EnableLowVaAccess registry value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ to 0",SET_NP
+AE,NP_NOT_PRESENT,Install one of the patches that adds the EnableLowVaAccess feature to disable mapping of the null page,INSTALL_NP_PATCH
+AE,NP_NOT_PRESENT,"On 32-bit Windows 7, set the EnableLowVaAccess registry value under HKLM\System\CurrentControlSet\Session Manager\Memory Management\ to 0",SET_NP
+AE,OS_NO_SECURE_BOOT,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,OS_NO_SMAP,Upgrade to Windows 8.1/Windows Server 2012 R2 or later,UPGRADE_TO_WINDOWS_8_1
+AE,OS_NO_SMEP,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,OS_OUTDATED_FOR_ASLR,Upgrade to Windows Vista SP2/Windows Server 2008 SP2 or later,UPGRADE_TO_VISTA_SP2
+AE,OS_OUTDATED_FOR_CFG,Install patch KB3000850 on Windows 8.1,UPGRADE_TO_WINDOWS_8_1_PATCH
+AE,OS_OUTDATED_FOR_CFG,Upgrade to Windows 10/Windows Server 2016 or later,UPGRADE_TO_WINDOWS_10
+AE,OS_OUTDATED_FOR_DEP,Upgrade to Windows Vista SP2/Windows Server 2008 SP2 or later,UPGRADE_TO_VISTA_SP2
+AE,OS_OUTDATED_FOR_FONT_BLOCKING,Upgrade to Windows 10/Windows Server 2016 or later,UPGRADE_TO_WINDOWS_10
+AE,OS_OUTDATED_FOR_KSEHOP,Upgrade to Windows 8.1/Windows Server 2012 R2 or later,UPGRADE_TO_WINDOWS_8_1
+AE,OS_OUTDATED_FOR_MANDATORY_ASLR,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+AE,OS_OUTDATED_FOR_NULL_PAGE_PROTECTION,Upgrade to Windows 7 SP1 and ensure system is fully patched,UPGRADE_TO_7SP1_PATCH
+AE,OS_OUTDATED_FOR_SECURE_SEARCH_PATH,"Upgrade to at least Windows XP service pack 3. For OSes prior to windows 8, apply the the secure search path patch. Follow directions in Microsoft Knowledge Base article 2265107 to set registry value CWDIllegalInDLLSearch to 2",UPGRADE_XPSP3_APPLY_SSP_PATCH
+AE,OS_OUTDATED_FOR_SEHOP,Upgrade to Windows Vista SP2/Windows Server 2008 SP2 or later,UPGRADE_TO_VISTA_SP2
+AE,SECURE_BOOT_NOT_ENABLED,Enable Secure Boot in BIOS Setup at boot or by using OEM supported tools,ENABLE_SECURE_BOOT
+AE,SEHOP_IS_DISABLED,"On Vista SP1 through Windows 7, set the DisableExceptionChainValidation registry value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to 0",SET_DECV
+AE,SEHOP_IS_DISABLED_WIN8,"On Windows 8+, configure the MitigationOptions value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to enable SEHOP",SET_MO_FOR_SEHOP
+AE,SEHOP_NOT_CONFIGURED,"On Windows 8+, configure the MitigationOptions value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to enable SEHOP",SET_MO_FOR_SEHOP
+AE,SEHOP_NOT_PRESENT,"On Windows 8+, configure the MitigationOptions value under HKLM\System\CurrentControlSet\Session Manager\Kernel\ to enable SEHOP",SET_MO_FOR_SEHOP
+AE,SEHOP_OVERRIDDEN_FOR_APP,Delete or configure the MitigationsOptions registry value for the application '{0}' under the Image File Execution Options key to enable SEHOP,SET_MO_ENABLE_SEHOP_FOR_APP
+AE,SSP_NOT_ENABLED,Follow instructions in Microsoft Knowledge Base article 2264107 to set registry value CWDIllegalInDLLSearch to 2,FOLLOW_2264107
+AE,SSP_NOT_EXIST,Follow instructions in Microsoft Knowledge Base article 2264107 to set registry value CWDIllegalInDLLSearch to 2,FOLLOW_2264107
+AE,SSP_NOT_PRESENT,Install the secure search path patch and follow instructions in Microsoft Knowledge Base article 2264107 to set registry value CWDIllegalInDLLSearch to 2 under HKLM\System\CurrentControlSet\Session Manager\,INSTALL_SSP_PATCH
+AE,SSP_NOT_PRESENT,Upgrade to Windows 8+. Follow instructions in Microsoft Knowledge Base article 2264107 to set registry value CWDIllegalInDLLSearch to 2,UPGRADE_TO_8_FOLLOW_2264107
+AVFRS,ARTEMIS_DISABLED,Enable GTI,ENABLE_ARTEMIS
+AVFRS,ARTEMIS_DISABLED_DP,Enable GTI for DP,ENABLE_ARTEMIS
+AVFRS,ARTEMIS_DISABLED_ES,Enable GTI for ES,ENABLE_ARTEMIS
+AVFRS,ARTEMIS_DISABLED_OA,Enable GTI for OA,ENABLE_ARTEMIS
+AVFRS,ARTEMIS_DISABLED_OD,Enable GTI for OD,ENABLE_ARTEMIS
+AVFRS,ARTEMIS_SENSITIVITY_DP,Set the GTI Sensitivity Level to Medium or higher for DP,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SENSITIVITY_ES,Set the GTI Sensitivity Level to Medium or higher for ES,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SENSITIVITY_LOW,Set the GTI Sensitivity Level to Medium or higher,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SENSITIVITY_OA,Set the GTI Sensitivity Level to Medium or higher for OA,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SENSITIVITY_OD,Set the GTI Sensitivity Level to Medium or higher for OD,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SENSITIVITY_VERY_LOW,Set the GTI Sensitivity Level to Medium or higher,SET_ARTEMIS_SENSITIVITY_MEDIUM
+AVFRS,ARTEMIS_SERVER_UNEXPECTED,Confirm GTI network configuration is correct,CHECK_ARTMIS_CONFIGURATION
+AVFRS,ARTEMIS_SERVER_UNREACHABLE,Investigate GTI connectivity issues,CHECK_ARTEMIS_CONNECTIVITY
+AVFRS,AV_ENGINE_OUTDATED,Update the AV engine to the latest supported version. See http://www.mcafee.com/us/support/support-eol-scan-engine.aspx for more information.,UPDATE_AV_ENGINE
+AVFRS,AV_ENGINE_VERY_OUTDATED,Update the AV engine to the latest supported version. See http://www.mcafee.com/us/support/support-eol-scan-engine.aspx for more information.,UPDATE_AV_ENGINE
+AVFRS,DAT_OUTDATED,Update the DAT file,UPDATE_DAT
+AVFRS,DAT_VERY_OUTDATED,Update the DAT file,UPDATE_DAT
+AVFRS,VSE_NOT_INSTALLED,Install VirusScan Enterprise,INSTALL_VSE
+AVFRS,VSE_OUTDATED,Update VirusScan Enterprise to the latest recommended version. See https://kc.mcafee.com/corporate/index?page=content&id=kb51111 for more information.,UPDATE_OLD_VSE
+AVFRS,VSE_SERVICE_NOT_AUTOMATIC,Change the VirusScan Enterprise service Startup Type to Automatic,SET_VSE_SERVICE_AUTO
+AVFRS,VSE_SERVICE_NOT_RUNNING,Start the VirusScan Enterprise service,START_VSE_SERVICE
+AVFRS,VSE_STARTUP_DISABLED,Enable on access scanning at system startup,ENABLE_VSE_STARTUP
+AVFRS,VSE_VERY_OUTDATED,Update VirusScan Enterprise to the minimum recommended version. See https://kc.mcafee.com/corporate/index?page=content&id=kb51111 for more information.,UPDATE_VERY_OLD_VSE
+AW,APPLOCKER_BAD_PUBLISHER,Remove the AppLocker rule named '{0}' from the '{1}' rule set,REMOVE_APPLOCKER_RULE
+AW,APPLOCKER_BLACKLIST_RULE_MISSING,Add a blacklist rule for '{0}' to the Applocker rule named '{1}' in the '{2}' rule set,ADD_APPLOCKER_BLACKLIST_RULE
+AW,APPLOCKER_NO_BLACKLIST_RULES,Add all blacklist rules to the Applocker rule named '{0}' in the '{1}' rule set,ADD_APPLOCKER_BLACKLIST_RULES
+AW,APPLOCKER_NO_USERPROFILE_RULES,Remove the AppLocker rule named '{0}' from the '{1}' rule set,REMOVE_APPLOCKER_RULE
+AW,APPLOCKER_RULESET_NOT_CONFIGURED,Configure the AppLocker rule set '{0}'.,CONFIGURE_APPLOCKER_RULESET
+AW,APPLOCKER_RULESET_NOT_ENFORCED,Change the AppLocker rule set '{0}' to enforcement mode,ENFORCE_APPLOCKER_RULESET
+AW,APPLOCKER_SERVICE_NOT_AUTOMATIC,Change the Application Identity service Startup Type to Automatic,SET_APPLOCKER_SERVICE_AUTO
+AW,APPLOCKER_SERVICE_NOT_RUNNING,Start the Application Identity service,START_APPLOCKER_SERVICE
+AW,NO_WHITELISTING,Implement a supported whitelisting technology,CONFIGURE_WHITELISTING
+AW,SRP_BINARIES_EXE_ONLY,Change SRP to apply to all executables and libraries,CHANGE_SRP_BINARIES
+AW,SRP_BINARIES_NONE,Change SRP to apply to all executables and libraries,CHANGE_SRP_BINARIES
+AW,SRP_BLACKLIST_RULE_MISSING,Add a blacklist rule for '{0}' to SRP,ADD_SRP_BLACKLIST_RULE
+AW,SRP_MISSING_EXE_TYPE,Add an executable type of '{0}' to the SRP Designated File Types list,ADD_SRP_EXE_TYPE
+AW,SRP_NO_BLACKLIST_RULES,Add all required SRP blacklist rules,ADD_SRP_BLACKLIST_RULES
+AW,SRP_NO_PATH_RULES,Add SRP path rules,ADD_SRP_PATH_RULE
+AW,SRP_NO_WHITELIST_RULES,Add SRP whitelist rules,ADD_SRP_WHITELIST_RULES
+AW,SRP_NOT_WHITELISTING,Configure SRP to be in whitelisting mode,CONFIGURE_SRP_WHITELISTING
+AW,SRP_RULE_NOT_ENFORCED,Configure the SRP rule to be enforced,CONFIGURE_SRP_RULE_ENFORCEMENT
+AW,SRP_SCOPE_USERS_ONLY,Change SRP scope to apply to all users,CHANGE_SRP_SCOPE
+AW,SRP_WHITELIST_RULE_MISSING,Add a whitelist rule for '{0}' to SRP,ADD_SRP_WHITELIST_RULE
+HIPS,HIPS_NOT_ENABLED,Enable HIPS in HIPS policy,ENABLE_HIPS
+HIPS,HIPS_NOT_ENFORCING,Disable HIPS adaptive mode (aka audit mode),DISABLE_HIPS_AUDIT_MODE
+HIPS,HIPS_NOT_INSTALLED,Install HIPS,INSTALL_HIPS
+HIPS,HIPS_NOT_LOGGING_LOW,Change the HIPS Protection policy so low severity events are at least set to Log,HIPS_LOG_LOW
+HIPS,HIPS_NOT_PREVENTING_HIGH,Change the HIPS Protection policy so high severity events are set to Prevent,HIPS_PREVENT_HIGH
+HIPS,HIPS_NOT_PREVENTING_MEDIUM,Change the HIPS Protection policy so medium severity events are set to Prevent,HIPS_PREVENT_MEDIUM
+HIPS,HIPS_SERVICE_NOT_AUTOMATIC,Change the HIPS service Startup Type to Automatic,SET_HIPS_SERVICE_AUTO
+HIPS,HIPS_SERVICE_NOT_RUNNING,Start the HIPS service,START_HIPS_SERVICE
+HIPS,UPDATE_HIPS,Update HIPS to the latest version,UPDATE_HIPS
+HIPS,UPDATE_HIPS_CONTENT,Update HIPS security content to the latest version,UPDATE_HIPS_CONTENT
+HIPS,UPDATE_HIPS_OLD,Update HIPS to the latest version,UPDATE_HIPS
+MISSING_DATA,MISSING_DATA,Enable Splunk data collection,MISSING_DATA
+MOS,UNSUPPORTED_OS,Upgrade to Windows Vista SP2/Windows Server 2008 SP2 or later,UPGRADE_TO_VISTA_SP2
+MOS,UNSUPPORTED_OS,Upgrade to Windows 7 SP1/Windows Server 2008 R2 SP1 or later,UPGRADE_TO_7_SP1
+MOS,UNSUPPORTED_OS,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+MOS,UNSUPPORTED_OS,Upgrade to Windows 8.1/Windows Server 2012 R2 or later,UPGRADE_TO_WINDOWS_8_1
+MOS,UNSUPPORTED_OS,Upgrade to Windows 10/Windows Server 2016 or later,UPGRADE_TO_WINDOWS_10
+MOS,UNSUPPORTED_SP_WIN7,Upgrade to Windows 7 SP1/Windows Server 2008 R2 SP1 or later,UPGRADE_TO_7_SP1
+MOS,UNSUPPORTED_SP_WINVISTA,Upgrade to Windows Vista SP2/Windows Server 2008 SP2 or later,UPGRADE_TO_VISTA_SP2
+MOS,UPGRADE_TO_WIN10,Upgrade to Windows 10/Windows Server 2016 or later,UPGRADE_TO_WINDOWS_10
+MOS,UPGRADE_TO_WIN7,Upgrade to Windows 7 SP1/Windows Server 2008 R2 SP1 or later,UPGRADE_TO_7_SP1
+MOS,UPGRADE_TO_WIN8,Upgrade to Windows 8/Windows Server 2012 or later,UPGRADE_TO_WINDOWS_8
+MOS,UPGRADE_TO_WIN81,Upgrade to Windows 8.1/Windows Server 2012 R2 or later,UPGRADE_TO_WINDOWS_8_1
+OSPD,NO_OS_PATCHES,Patch the operating system with recent updates,PATCH_OS
+OSPD,NO_OS_SECURITY_PATCHES,Patch the operating system with recent security updates,SECURITY_PATCH_OS
+OSPD,OLD_OS_SECURITY_PATCH_AVERAGE_DAYS,Patch the operating system with security updates within 30 days of patch release,SECURITY_PATCH_OS_REGULARLY
+OSPD,OLD_OS_SECURITY_PATCH_DATE,Patch the operating system with recent security updates,SECURITY_PATCH_OS
+OSPD,UPGRADE_OS,Upgrade the operating system to be newer than Windows XP,UPGRADE_OS
+PtH,BLOCK_W2W_TRAFFIC,Create firewall rule to block workstation to workstation traffic on port {0},BLOCK_W2W_TRAFFIC
+PtH,CONFIGURE_EVENT_LOG,Configure Group Policy to audit user logon/logoff events,CONFIGURE_EVENT_LOG
+PtH,DOMAIN_ADMIN_LOGON_SERVER,Do not use Domain Admin accounts on member servers,DOMAIN_ADMIN_LOGON_REMEDIATION_SERVER
+PtH,DOMAIN_ADMIN_LOGON_WORKSTATION,Do not use Domain Admin accounts on workstations,DOMAIN_ADMIN_LOGON_REMEDIATION_WORKSTATION

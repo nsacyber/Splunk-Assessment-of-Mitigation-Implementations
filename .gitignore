@@ -1,0 +1,2 @@
+# ignore executables e.g av.exe and ae.exe from SAMI-TA
+**/*.exe

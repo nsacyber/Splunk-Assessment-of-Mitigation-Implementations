@@ -1,0 +1,4 @@
+WhitelistedPath, Value
+%hkey_local_machine\software\microsoft\windows\currentversion\programfilesdir%,1
+%hkey_local_machine\software\microsoft\windows\currentversion\programfilesdir (x86)%,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%,1

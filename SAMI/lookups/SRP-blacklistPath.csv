@@ -1,0 +1,16 @@
+BlacklistedPath, Value
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\debug,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\pchealth\errorrep,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\registration,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\catroot2,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\com\dmp,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\fxstmp,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\spool\drivers\color,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\spool\printers,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\spool\servers,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\system32\tasks,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\syswow64\com\dmp,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\syswow64\fxstmp,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\syswow64\tasks,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\temp,1
+%hkey_local_machine\software\microsoft\windows nt\currentversion\systemroot%\tracing,1
