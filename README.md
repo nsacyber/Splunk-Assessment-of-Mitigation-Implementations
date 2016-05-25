@@ -1,9 +1,6 @@
 # Splunk Assessment of Mitigation Implementations
 
-
-## About SAMI
-
-Mitigation implementations have not traditionally been evaluated or prioritized.  NSA Information Assurance recommends mitigation strategies but there are few methods to validate proper implementation and prioritize fixes. The SAMI application was developed to monitor the degree to which specific aspects of the [NSA Information Assurance](https://www.iad.gov/) [top 10 mitigation strategies](https://www.iad.gov/iad/library/ia-guidance/iads-top-10-information-assurance-mitigation-strategies.cfm) have been deployed on Windows endpoints. It monitors data related to the implementation of specific mitigations and returns prioritized recommendations to more completely implement those recommendations. The application can be used to determine a network’s mitigation implementation status and can be monitored over time to demonstrate improvements and identify changes that negatively impact mitigations.
+Mitigation implementations have not traditionally been evaluated or prioritized. NSA Information Assurance recommends mitigation strategies but there are few methods to validate proper implementation and prioritize fixes. The SAMI application was developed to monitor the degree to which specific aspects of the [NSA Information Assurance](https://www.iad.gov/) [top 10 mitigation strategies](https://www.iad.gov/iad/library/ia-guidance/iads-top-10-information-assurance-mitigation-strategies.cfm) have been deployed on Windows endpoints. It monitors data related to the implementation of specific mitigations and returns prioritized recommendations to more completely implement those recommendations. The application can be used to determine a network’s mitigation implementation status and can be monitored over time to demonstrate improvements and identify changes that negatively impact mitigations.
 
 SAMI evaluates several metrics:
 * Modern Operating System (MOS)
